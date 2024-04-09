@@ -1,0 +1,32 @@
+.card {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  transition: transform 0.2s;
+}
+
+.card.hovered {
+  /* Styles applied when card is being hovered over */
+  border-color: blue;
+  box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-content {
+  text-align: center;
+}
+
+.card-title {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.card-description {
+  font-size: 1rem;
+  color: #666;
+}

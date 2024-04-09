@@ -1,0 +1,3 @@
+gpt: "https://chat.openai.com/c/9769b873-c5ee-491c-9c19-c29959f7ad8f"
+
+gemini: "https://gemini.google.com/app/af5ac0e41ba1434d"
