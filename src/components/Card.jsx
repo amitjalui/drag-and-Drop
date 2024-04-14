@@ -7,7 +7,6 @@ const Card = ({ id, title, content, onHover, isHovered, currentHoveredCards, set
   const cardRef = useRef(null);
   const [leftDelyTimer, setLeftDelayTimer] = useState(null);
   const [isDraggingOver, setIsDragging] = useState(false);
-  const [isMouseDown, setIsMouseDown] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -38,18 +37,11 @@ const Card = ({ id, title, content, onHover, isHovered, currentHoveredCards, set
     e.preventDefault();
   };
 
-  const handleMouseDown = () => {
-    setIsMouseDown(true);
-  };
-
-  const handleMouseUp = () => {
-    setIsMouseDown(false);
-  };
-
   const handleMouseEnter = () => {
     if (cardRef.current) {
       cardRef.current.classList.add("hovered")
     }
+    
   }
 
   const handleMouseLeave = () => {
@@ -68,8 +60,6 @@ const Card = ({ id, title, content, onHover, isHovered, currentHoveredCards, set
       onDragOver={handleDragOver}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
       ref={cardRef}
     >
       <div className="card-content">
