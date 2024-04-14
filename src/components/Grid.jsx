@@ -14,20 +14,20 @@ const Grid = () => {
   ]);
 
   const [hoveredCards, setHoveredCards] = useState([]);
+  const [currentHoveredCards, setCurrentHoveredCards] = useState(null);
 
-  console.log(hoveredCards)
+  console.log(currentHoveredCards)
 
   const handleDrop = e => {
     e.preventDefault();
-
-    const cardId = e.dataTransfer.getData('cardId');
-    // console.log("Dropped card ID:", cardId);
+    setCurrentHoveredCards(null)
+    e.dataTransfer.getData('cardId');
   }
 
   const handleCardHover = (cardId, isHovering) => {
-    console.log(isHovering)
     if (isHovering) {
       setHoveredCards(prevState => [...prevState, cardId]);
+      setCurrentHoveredCards(cardId)
     } else {
       setHoveredCards(prevState => prevState.filter(id => id !== cardId));
     }
@@ -47,6 +47,8 @@ const Grid = () => {
           content={card.content}
           onHover={handleCardHover}
           isHovered={hoveredCards.includes(card.id)}
+          currentHoveredCards={currentHoveredCards}
+          setCurrentHoveredCards={setCurrentHoveredCards}
         />
       ))}
     </div>

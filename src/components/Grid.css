@@ -3,3 +3,11 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust column width as needed */
   grid-gap: 20px; /* Adjust gap between cards as needed */
 }
+
+.empty-space {
+  width: 100%; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  background-color: #f0f0f0; /* Example background color for the empty space */
+  border: 1px dashed #ccc; /* Example dashed border for the empty space */
+  box-sizing: border-box; /* Ensure that the border is included in the width/height */
+}

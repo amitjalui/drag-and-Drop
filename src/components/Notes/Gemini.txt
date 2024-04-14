@@ -1,0 +1,21 @@
+Card.jsx:
+
+When a card is dragged over another card:
+The handleDragEnter function is triggered, setting the isDraggingOver state to true.
+The onHover prop is called with the card ID (id) and true (indicating hovering) to notify the Grid component.
+Grid.jsx:
+
+When handleCardHover receives the hover information from Card.jsx:
+If hovering (isHovering is true):
+The card ID is added to the hoveredCards state array using setHoveredCards.
+The currentHoveredCards state is updated with the current hovered card ID.
+If not hovering (isHovering is false):
+The card ID is removed from the hoveredCards state array if it was previously present.
+The className attribute in the grid's JSX leverages currentHoveredCards along with isDraggingOver to conditionally apply the "hovered" class only when the dragged card is over a specific card.
+When the user hovers their mouse over a card (not dragging):
+handleMouseEnter applies the "hovered" class directly to the card's element.
+handleMouseLeave removes the "hovered" class when the mouse leaves the card.
+Console Output:
+
+The console.log statement inside handleCardHover (with isHovering as true) will print the ID of the card being hovered over when a card is dragged.
+This allows you to verify that the hovering information is being correctly transmitted and tracked.

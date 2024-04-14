@@ -1,0 +1,54 @@
+Of course! Let's walk through the flow of events that occurs when a card is dragged and hovered over other cards in your grid layout:
+
+Initial Drag Start:
+
+When the user starts dragging a card, the handleDragStart function is triggered in the Card component.
+This function sets the data transfer data (cardId) for the dragged card, which will be used to identify the card being dragged.
+Drag Enter:
+
+As the dragged card enters the space of another card, the handleDragEnter function is triggered in the Card component.
+This function sets the isDraggingOver state to true to indicate that the dragged card is currently hovering over another card.
+It also triggers the onHover function provided by the Grid component, passing the ID of the hovered card and true to indicate that the card is being hovered over.
+Drag Leave:
+
+If the dragged card leaves the space of a hovered card, the handleDragLeave function is triggered in the Card component.
+This function sets a delay before handling the hover state, allowing for a short time to determine if the dragged card will re-enter another card's space.
+If the dragged card doesn't re-enter another card's space within the delay time, the onHover function is triggered with false to indicate that the card is no longer being hovered over.
+Drag Over:
+
+While the dragged card is hovering over another card, the handleDragOver function in the Card component prevents the default behavior, ensuring that the dragEnter and dragLeave events are handled accurately.
+State Management:
+
+The hoveredCards state in the Grid component maintains a list of IDs of the cards currently being hovered over by the dragged card.
+When a card is hovered over (isHovering is true), its ID is added to the hoveredCards state. When it stops being hovered over, its ID is removed from the state.
+Logging and Feedback:
+
+The currentHoveredCards state in the Grid component keeps track of the ID of the card currently being hovered over by the dragged card.
+This state is logged to the console for debugging purposes, providing feedback on which card the dragged card is currently hovering over.
+
+
+------------
+
+
+=> When user starts dragging a card, handleDragStart triggered.
+handleDragStart(
+  return cardId // set cardId
+)
+
+=> When user dragged card enters the space of another card, handleDragEnter triggered.
+handleDragEnter (
+  isDraggingOver(true)  // useState
+  onHover(id, true) // func from Grid
+)
+indicate that the dragged card is currently hovering over another card.
+
+=> When user dragged card leaves the space of a hovered card, handleDragLeave triggered.
+handleDragLeave (
+  setTimeout(onHover(id, false)) after 200ms
+)
+sets a delay before handling the onHover state false, allowing for a short time to determine if the dragged card will re-enter another card's space.
+
+=> handleDragOver ()
+prevent events are handled accurately.
+
+-------------
