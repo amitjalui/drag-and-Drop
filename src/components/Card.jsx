@@ -3,7 +3,7 @@ import "./Card.css";
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const Card = ({ id, title, content, onHover, isHovered, currentHoveredCards, setCurrentHoveredCards }) => {
+const Card = ({ id, title, content, onHover, isHovered, currentHoveredCards, setCurrentHoveredCards, setSelectedCard }) => {
   const cardRef = useRef(null);
   const [leftDelyTimer, setLeftDelayTimer] = useState(null);
   const [isDraggingOver, setIsDragging] = useState(false);
@@ -16,6 +16,7 @@ const Card = ({ id, title, content, onHover, isHovered, currentHoveredCards, set
   
   const handleDragStart = (e) => {
     e.dataTransfer.setData('cardId', id);
+    setSelectedCard(id)
     // console.log("Drag started for card ID:", id);
   };
 
@@ -41,7 +42,6 @@ const Card = ({ id, title, content, onHover, isHovered, currentHoveredCards, set
     if (cardRef.current) {
       cardRef.current.classList.add("hovered")
     }
-    
   }
 
   const handleMouseLeave = () => {

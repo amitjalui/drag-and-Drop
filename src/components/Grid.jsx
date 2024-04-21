@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Card from './Card.jsx';
 import "./Grid.css"
+import { useEffect } from 'react';
 
 const Grid = () => {
   const [cardsData, setCardsData] = useState([
@@ -12,16 +13,38 @@ const Grid = () => {
     { id: 6, title: 'Card 6', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mattis finibus mauris id tempus.' },
     { id: 7, title: 'Card 7', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mattis finibus mauris id tempus.' },
   ]);
+  const [newData, setNewData] = useState([...cardsData])
+  const [selectedCard, setSelectedCard] = useState(null)
+  const [selectedCardData, setSelectedCardData] = useState(null);
 
   const [hoveredCards, setHoveredCards] = useState([]);
   const [currentHoveredCards, setCurrentHoveredCards] = useState(null);
 
-  console.log(currentHoveredCards)
+  const arrange = (selectedCard, hoveredCard) => {
+    console.log(selectedCard)
+    let data = newData.filter(card => card.id === selectedCard);
+
+    let ans = newData.filter(card => card.id !== selectedCard);
+    let index = newData.findIndex(card => card.id === hoveredCard);
+    
+    if (index !== -1 && data.length) {
+      ans.splice(index, 0, ...data);
+      setNewData(ans)
+    }
+  }
+
+  useEffect(() => {
+    arrange(selectedCard, currentHoveredCards)
+  }, [selectedCard, currentHoveredCards])
+
+  console.log(newData)
 
   const handleDrop = e => {
     e.preventDefault();
     setCurrentHoveredCards(null)
     e.dataTransfer.getData('cardId');
+
+    // setSelectedCardData(null);
   }
 
   const handleCardHover = (cardId, isHovering) => {
@@ -39,7 +62,7 @@ const Grid = () => {
 
   return (
     <div className="grid" onDrop={handleDrop} onDragOver={handleDragOver} data-dropzone="grid">
-      {cardsData.map(card => (
+      {newData.map(card => (
         <Card 
           key={card.id} 
           id={card.id}
@@ -49,6 +72,7 @@ const Grid = () => {
           isHovered={hoveredCards.includes(card.id)}
           currentHoveredCards={currentHoveredCards}
           setCurrentHoveredCards={setCurrentHoveredCards}
+          setSelectedCard={setSelectedCard}
         />
       ))}
     </div>
